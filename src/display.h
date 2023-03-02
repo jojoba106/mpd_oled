@@ -63,11 +63,11 @@ void draw_triangle_slider(ArduiPi_OLED &display, int x_start, int y_start,
                           int width, int height, float percent);
 
 // Draw text
-void draw_text(ArduiPi_OLED &display, int x_start, int y_start, int max_len,
-               std::string str);
+void draw_text(ArduiPi_OLED &display, int x_start, int y_start, int sz,
+               int max_len, std::string str);
 
 // Draw text and scroll in box
-void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start,
+void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, int sz,
                       int max_len, std::string str, std::vector<double> scroll,
                       double secs = 0.0);
 

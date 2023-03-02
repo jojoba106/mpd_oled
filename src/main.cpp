@@ -451,30 +451,20 @@ void draw_clock(ArduiPi_OLED &display, const display_info &disp_info)
 
 void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
 {
-  const int H = 8; // character height
-  const int W = 6; // character width
-  draw_spectrum(display, 0, 0, SPECT_WIDTH, 32, disp_info.spect);
-  draw_connection(display, 128 - 2 * W, 0, disp_info.conn);
-  draw_triangle_slider(display, 128 - 5 * W, 1, 11, 6,
+  const int H = 128; // character height
+  const int W = 64;  // character width
+
+  draw_triangle_slider(display, 0, 0, W, (int)(H * 0.4),
                        disp_info.status.get_volume());
-  if (disp_info.status.get_kbitrate() > 0)
-    draw_text(display, 128 - 10 * W, 0, 4, disp_info.status.get_kbitrate_str());
 
-  int clock_offset = (disp_info.clock_format < 2) ? 0 : -2;
-  draw_time(display, 128 - 10 * W + clock_offset, 2 * H, 2,
-            disp_info.clock_format);
-
+  string info = new String();
+  info = disp_info.status.get_origin() + " - " + disp_info.status.get_title();
   vector<double> scroll_origin(disp_info.scroll.begin() + 2,
                                disp_info.scroll.begin() + 4);
-  draw_text_scroll(display, 0, 4 * H + 4, 20, disp_info.status.get_origin(),
+  draw_text_scroll(display, 0, (int)(H * 0.4), (int)(H * 0.4), 20, info,
                    scroll_origin, disp_info.text_change.secs());
 
-  vector<double> scroll_title(disp_info.scroll.begin(),
-                              disp_info.scroll.begin() + 2);
-  draw_text_scroll(display, 0, 6 * H, 20, disp_info.status.get_title(),
-                   scroll_title, disp_info.text_change.secs());
-
-  draw_solid_slider(display, 0, 7 * H + 6, 128, 2,
+  draw_solid_slider(display, 0, (int)(H * 0.5), 128, 2,
                     100 * disp_info.status.get_progress());
 }
 
@@ -605,11 +595,11 @@ int start_idle_loop(ArduiPi_OLED &display, const OledOpts &opts)
     if (timer.finished()) {
       display.reset_offset();
       if (disp_info.status.get_state() == MPD_STATE_PLAY && fifo_fd < 0) {
-	// delay cava start by 2 seconds (for Moode)
-	// https://github.com/antiprism/mpd_oled/issues/67
+        // delay cava start by 2 seconds (for Moode)
+        // https://github.com/antiprism/mpd_oled/issues/67
         usleep(2 * 1000000);
-        opts.print_status_or_exit(start_cava(&fifo_file, opts));
-        fifo_fd = fileno(fifo_file);
+        // opts.print_status_or_exit(start_cava(&fifo_file, opts));
+        // fifo_fd = fileno(fifo_file);
       }
 
       timer.set_timer(update_sec); // Reset the timer

@@ -166,20 +166,20 @@ void draw_triangle_slider(ArduiPi_OLED &display, int x_start, int y_start,
 }
 
 // Draw text
-void draw_text(ArduiPi_OLED &display, int x_start, int y_start, int max_len,
-               string str)
+void draw_text(ArduiPi_OLED &display, int x_start, int y_start, int sz,
+               int max_len, string str)
 {
   if ((int)str.size() > max_len)
     str.resize(max_len);
 
   display.setTextColor(WHITE);
   display.setCursor(x_start, y_start);
-  display.setTextSize(1);
+  display.setTextSize(sz);
   print(display, str.c_str());
 }
 
 // Draw text
-void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start,
+void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, , int sz,
                       int max_len, string str, vector<double> scroll,
                       double secs)
 {
@@ -190,7 +190,7 @@ void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start,
   const double pixels_per_sec = scroll[0];
   const double scroll_after_secs = scroll[1];
 
-  int size = 1;
+  int size = sz;
   int W = 6 * size;
   str += "     ";
   double elapsed = secs - scroll_after_secs;
