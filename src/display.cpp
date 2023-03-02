@@ -184,7 +184,7 @@ void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, int sz,
                       double secs)
 {
   if ((int)str.size() <= max_len) {
-    draw_text(display, x_start, y_start, max_len, str);
+    draw_text(display, x_start, y_start, sz, max_len, str);
     return;
   }
   const double pixels_per_sec = scroll[0];
