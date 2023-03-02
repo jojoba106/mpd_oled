@@ -179,7 +179,7 @@ void draw_text(ArduiPi_OLED &display, int x_start, int y_start, int sz,
 }
 
 // Draw text
-void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, , int sz,
+void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, int sz,
                       int max_len, string str, vector<double> scroll,
                       double secs)
 {
