@@ -443,7 +443,7 @@ void draw_clock(ArduiPi_OLED &display, const display_info &disp_info)
   display.clearDisplay();
   // const int H = 8;  // character height
   const int W = 6; // character width
-  draw_text(display, 22, 0, 16, disp_info.conn.get_ip_addr());
+  draw_text(display, 22, 0, 1, 16, disp_info.conn.get_ip_addr());
   draw_connection(display, 128 - 2 * W, 0, disp_info.conn);
   draw_time(display, 4, 16, 4, disp_info.clock_format);
   draw_date(display, 32, 56, 1, disp_info.date_format);
