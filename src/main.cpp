@@ -456,13 +456,13 @@ void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
 
   // draw_triangle_slider(display, 0, 0, W, (int)(H * 0.4),
                       //  disp_info.status.get_volume());
-  draw_text(display,  (int)(W * 0.5)-6, 0, 2, 16,std::to_string(disp_info.status.get_volume()));
+  draw_text(display,  (int)(W * 0.5)-6, 0, 3, 16,std::to_string(disp_info.status.get_volume()));
 
   string info =
       disp_info.status.get_origin() + " - " + disp_info.status.get_title();
   vector<double> scroll_origin(disp_info.scroll.begin() + 2,
                                disp_info.scroll.begin() + 4);
-  draw_text_scroll(display, 0, (int)(H * 0.5), 2, 5, info,
+  draw_text_scroll(display, 0, (int)(H * 0.5), 3, 10, info,
                    scroll_origin, disp_info.text_change.secs());
 
   draw_solid_slider(display, 0, 62, 128, 2,
