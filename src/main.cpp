@@ -451,8 +451,8 @@ void draw_clock(ArduiPi_OLED &display, const display_info &disp_info)
 
 void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
 {
-  const int H = 128; // character height
-  const int W = 64;  // character width
+  const int H = 64; // character height
+  const int W = 128;  // character width
 
   draw_triangle_slider(display, 0, 0, W, (int)(H * 0.4),
                        disp_info.status.get_volume());
