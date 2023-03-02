@@ -457,8 +457,8 @@ void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
   draw_triangle_slider(display, 0, 0, W, (int)(H * 0.4),
                        disp_info.status.get_volume());
 
-  string info = new String();
-  info = disp_info.status.get_origin() + " - " + disp_info.status.get_title();
+  string info =
+      disp_info.status.get_origin() + " - " + disp_info.status.get_title();
   vector<double> scroll_origin(disp_info.scroll.begin() + 2,
                                disp_info.scroll.begin() + 4);
   draw_text_scroll(display, 0, (int)(H * 0.4), (int)(H * 0.4), 20, info,
