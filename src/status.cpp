@@ -461,7 +461,6 @@ string mpd_info::get_track_type() const
   string volumio_status = get_volumio_status();
   Hjson::Value obj =
       Hjson::Unmarshal(volumio_status.c_str(), volumio_status.size());
-  type;
   if (obj) {
     track_type = (obj["trackType"].type() == Hjson::Value::Type::STRING)
                      ? to_ascii(obj["trackType"])
