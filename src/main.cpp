@@ -458,7 +458,7 @@ void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
   //  disp_info.status.get_volume());
   draw_text(display, 0, (int)(H * 0.5) - 24, 2, 16,
             disp_info.status.get_track_type());
-  draw_text(display, (int)(W) - 20, 0, 3, 16,
+  draw_text(display, (int)(W) - 48, 0, 3, 16,
             std::to_string(disp_info.status.get_volume()));
 
   string info =
