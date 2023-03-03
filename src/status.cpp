@@ -210,6 +210,9 @@ void mpd_info::set_vals_volumio(struct mpd_connection *conn)
     origin = (obj["artist"].type() == Hjson::Value::Type::STRING)
                  ? to_ascii(obj["artist"])
                  : string();
+    track_type = (obj["trackType"].type() == Hjson::Value::Type::STRING)
+                     ? to_ascii(obj["trackType"])
+                     : string();
   }
   else {
     init_vals();
@@ -456,20 +459,10 @@ string mpd_info::get_kbitrate_str() const
   snprintf(str, str_len, "%4d", rate);
   return str;
 }
-string mpd_info::get_track_type() const
-{
-  string volumio_status = get_volumio_status();
-  Hjson::Value obj =
-      Hjson::Unmarshal(volumio_status.c_str(), volumio_status.size());
-  if (obj) {
-    track_type = (obj["trackType"].type() == Hjson::Value::Type::STRING)
-                     ? to_ascii(obj["trackType"])
-                     : new string();
-    return track_type;
-  }
-}
 
 int mpd_info::get_volume() const { return volume; }
+
+string mpd_info::get_track_type() const { return track_type; }
 
 string mpd_info::get_origin() const { return origin; }
 
