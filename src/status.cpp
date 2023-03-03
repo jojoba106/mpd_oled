@@ -239,6 +239,7 @@ void mpd_info::init_vals()
   volume = 0;
   origin = string();
   title = string();
+  track_type = string();
   song_elapsed_secs = 0;
   song_total_secs = 0;
   kbitrate = 0;
@@ -317,6 +318,7 @@ void mpd_info::print_vals() const
   fprintf(stdout, "volume: %d\n", volume);
   fprintf(stdout, "origin: %s\n", origin.c_str());
   fprintf(stdout, "title: %s\n", title.c_str());
+  fprintf(stdout, "trackType: %s\n", track_type.c_str());
   fprintf(stdout, "song_elapsed_secs: %d\n", song_elapsed_secs);
   fprintf(stdout, "song_total_secs: %d\n", song_total_secs);
   fprintf(stdout, "song_progress: %d\n", int(100 * get_progress()));
@@ -367,7 +369,7 @@ int mpd_info::init()
       bool has_title = false;
       bool is_empty = true;
       while (fgets(line, line_sz - 1, file)) {
-	is_empty = false;
+        is_empty = false;
         if (sscanf(line, "file=%[^\n]", buff) == 1)
           strcpy(file_name, buff);
         else if (sscanf(line, "artist=%[^\n]", buff) == 1)
@@ -383,18 +385,18 @@ int mpd_info::init()
         else if (sscanf(line, "state=%[^\n]", buff) == 1) {
           if (strcmp(buff, "stop") == 0)
             state = MPD_STATE_STOP;
-	  else if (strcmp(buff, "play") == 0)
+          else if (strcmp(buff, "play") == 0)
             state = MPD_STATE_PLAY;
-	  else if (strcmp(buff, "pause") == 0)
+          else if (strcmp(buff, "pause") == 0)
             state = MPD_STATE_PAUSE;
         }
       }
       fclose(file);
 
-      if(is_empty)
+      if (is_empty)
         state = MPD_STATE_STOP;
 
-      if(state != MPD_STATE_STOP) {
+      if (state != MPD_STATE_STOP) {
         if (!has_title) { // assume this is a renderer
           init_vals();
           origin = file_name; // display the renderer as the song origin
@@ -453,6 +455,19 @@ string mpd_info::get_kbitrate_str() const
   char str[str_len];
   snprintf(str, str_len, "%4d", rate);
   return str;
+}
+string mpd_info::get_track_type() const
+{
+  string volumio_status = get_volumio_status();
+  Hjson::Value obj =
+      Hjson::Unmarshal(volumio_status.c_str(), volumio_status.size());
+  type;
+  if (obj) {
+    track_type = (obj["trackType"].type() == Hjson::Value::Type::STRING)
+                     ? to_ascii(obj["trackType"])
+                     : string();
+    return track_type;
+  }
 }
 
 int mpd_info::get_volume() const { return volume; }

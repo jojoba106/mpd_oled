@@ -34,6 +34,7 @@ private:
   int volume;
   std::string origin;
   std::string title;
+  std::string track_type;
   int song_elapsed_secs;
   int song_total_secs;
   int kbitrate;
@@ -54,6 +55,7 @@ public:
   void print_vals() const;
 
   int get_volume() const;         // Volume: 0 - 100
+  std::string get_track_type() const; // Song trackType
   std::string get_origin() const; // Song origin: station, artist, album...
   std::string get_title() const;  // Song title
   int get_elapsed_secs() const;   // Elapsed time of song in seconds
