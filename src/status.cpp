@@ -464,7 +464,7 @@ string mpd_info::get_track_type() const
   if (obj) {
     track_type = (obj["trackType"].type() == Hjson::Value::Type::STRING)
                      ? to_ascii(obj["trackType"])
-                     : string();
+                     : "";
     return track_type;
   }
 }
