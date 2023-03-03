@@ -191,7 +191,7 @@ void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, int sz,
   const double scroll_after_secs = scroll[1];
 
   int size = sz;
-  int W = 6 * size;
+  int W = 6 * 1;
   str += "     ";
   double elapsed = secs - scroll_after_secs;
   int pix_shift = (elapsed < 0)
