@@ -598,7 +598,7 @@ int start_idle_loop(ArduiPi_OLED &display, const OledOpts &opts)
       if (disp_info.status.get_state() == MPD_STATE_PLAY && fifo_fd < 0) {
         // delay cava start by 2 seconds (for Moode)
         // https://github.com/antiprism/mpd_oled/issues/67
-        usleep(2 * 1000000);
+        //usleep(2 * 1000000);
         // opts.print_status_or_exit(start_cava(&fifo_file, opts));
         // fifo_fd = fileno(fifo_file);
       }
