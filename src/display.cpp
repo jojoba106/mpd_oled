@@ -194,10 +194,9 @@ void draw_text_scroll(ArduiPi_OLED &display, int x_start, int y_start, int sz,
   int W = 6 * size;
   str += "     ";
   double elapsed = secs - scroll_after_secs;
-  // int pix_shift = (elapsed < 0)
-  //                     ? 0.0
-  //                     : int(elapsed * pixels_per_sec + 0.5) % (str.size() * W);
-  int pix_shift = int(elapsed * pixels_per_sec + 0.5) % (str.size() * W);
+  int pix_shift = (elapsed < 0)
+                      ? 0.0
+                      : int(elapsed * pixels_per_sec + 0.5) % (str.size() * W);
   int pix_offset = pix_shift % W;
   int char_pix_offset = (W - pix_offset) % W;
   int char_shift = pix_shift / W + (char_pix_offset > 0);
