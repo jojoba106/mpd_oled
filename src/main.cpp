@@ -461,7 +461,7 @@ void draw_spect_display(ArduiPi_OLED &display, const display_info &disp_info)
   int volume = disp_info.status.get_volume();
   int pos_x = (int)(W) - 34;
   if(volume == 100){
-    pos_x = (int)(W) - 40;
+    pos_x = (int)(W) - 58;
   }
   draw_text(display, (int) pos_x, 0, 3, 16,
             std::to_string(volume));
